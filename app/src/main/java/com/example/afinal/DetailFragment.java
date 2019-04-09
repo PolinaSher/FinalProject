@@ -27,7 +27,7 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         dataFromActivity = getArguments();
-        id = dataFromActivity.getLong(NewsFeed.ITEM_ID);
+ //       id = dataFromActivity.getLong(NewsFeed.ITEM_ID);
         post = dataFromActivity.getInt(NewsFeed.ITEM_POSITION);
         // Inflate the layout for this fragment
         View result = inflater.inflate(R.layout.fragment_detail, container, false);
@@ -38,12 +38,13 @@ public class DetailFragment extends Fragment {
 
         TextView send = (TextView) result.findViewById(R.id.send);
         send.setText(dataFromActivity.getString(NewsFeed.SEND_RECEIVE));
+
         //show the id:
-        TextView idView = (TextView) result.findViewById(R.id.id);
-        idView.setText("ID=" + id);
+        TextView url = (TextView) result.findViewById(R.id.id);
+        url.setText(dataFromActivity.getString(NewsFeed.URL));
 
         // get the delete button, and add a click listener:
-        Button saveButton = (Button) result.findViewById(R.id.saveButton);
+/*        Button saveButton = (Button) result.findViewById(R.id.saveButton);
         saveButton.setOnClickListener(clk -> {
 
             if (isTablet) { //both the list and details are on the screen:
@@ -68,6 +69,7 @@ public class DetailFragment extends Fragment {
                 parent.finish(); //go back
             }
         });
+        */
         return result;
     }
 }

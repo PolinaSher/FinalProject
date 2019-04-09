@@ -3,6 +3,7 @@ package com.example.afinal;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +42,11 @@ public class NewsFeed extends AppCompatActivity {
     public static final String ITEM_SELECTED = "News";
     public static final String ITEM_POSITION = "POSITION";
     public static final String SEND_RECEIVE = "Title";
+    public static final String URL = "url";
     public static final String ITEM_ID = "ID";
     public static final int EMPTY_ACTIVITY = 345;
 
+    private SharedPreferences sp;
     private ListView chatListView;
     private Button sendButton;
     private Button receiveButton;
@@ -70,7 +74,7 @@ public class NewsFeed extends AppCompatActivity {
 
         chatList = new ArrayList<>();
         //get a database:
-        MyDatabaseOpenHelper dbOpener = new MyDatabaseOpenHelper(this);
+   /*     MyDatabaseOpenHelper dbOpener = new MyDatabaseOpenHelper(this);
         db = dbOpener.getWritableDatabase();
 
         //query all the results from the database:
@@ -91,19 +95,28 @@ public class NewsFeed extends AppCompatActivity {
             //add the new Contact to the array list:
             chatList.add(new MessageModel(message, isSend, id));
         }
+*/
 
-        adapter = new ChatAdapter(this, chatList);
-        chatListView.setAdapter(adapter);
+
+        sp = getSharedPreferences("FileName", Context.MODE_PRIVATE);
+        String savedString = sp.getString("ReserveName", "");
+        chatEditText.setText(savedString);
+
 
 
         receiveButton.setOnClickListener(b -> {
              searched = chatEditText.getText().toString();
-
+          //  URLEncoder.encode( searched,"UTF-8");
+             chatList.clear();
             ForecastQuery networkThread = new ForecastQuery();
             networkThread.execute("http://webhose.io/filterWebContent?token=ec43cbf6-a1e9-4a0b-ac09-8c4e7e9c6fd1&format=xml&sort=crawled&q="+searched);
 
-            progressBar = (ProgressBar) findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.VISIBLE);  //show the progress bar
+
+            adapter = new ChatAdapter(this, chatList);
+            chatListView.setAdapter(adapter);
+
+/*            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+          progressBar.setVisibility(View.VISIBLE);  //show the progress bar   */
 
             //add to the database and get the new ID
 /*            ContentValues newRowValues = new ContentValues();
@@ -144,6 +157,7 @@ public class NewsFeed extends AppCompatActivity {
 
             dataToPass.putInt(ITEM_POSITION, position);
             dataToPass.putLong(ITEM_ID, chatList.get(position).getId());
+            dataToPass.putString(URL, chatList.get(position).getUrl());
 
             if (isTablet) {
                 DetailFragment dFragment = new DetailFragment(); //add a DetailFragment
@@ -167,9 +181,24 @@ public class NewsFeed extends AppCompatActivity {
 
     }
 
+    protected void onPause() {
+        super.onPause();
+
+        //get an editor object
+        SharedPreferences.Editor editor = sp.edit();
+
+        //save what was typed under the name "ReserveName"
+        String whatWasTyped = chatEditText.getText().toString();
+        editor.putString("ReserveName", whatWasTyped);
+
+        //write it to disk:
+        editor.commit();
+    }
+
     public class MessageModel {
         private String msg;
         private String isSend;
+        private String url;
         private long id;
 
         public MessageModel(String msg, String isSend, long id) {
@@ -177,6 +206,13 @@ public class NewsFeed extends AppCompatActivity {
             this.isSend = isSend;
             this.id = id;
         }
+
+        public MessageModel(String msg, String isSend, String url) {
+            this.msg = msg;
+            this.isSend = isSend;
+            this.url = url;
+        }
+
 
         public String getMsg() {
             return msg;
@@ -189,6 +225,11 @@ public class NewsFeed extends AppCompatActivity {
         public long getId() {
             return id;
         }
+
+        public String getUrl() {
+            return url;
+        }
+
     }
 
     protected class ChatAdapter extends BaseAdapter {
@@ -292,12 +333,15 @@ public class NewsFeed extends AppCompatActivity {
                         if (tagName.equals("url")) {
                             xpp.next();
                             link = xpp.getText();
-                            publishProgress(30);
+  //                          publishProgress(30);
                         }
                        else if (tagName.equals("title")) {
                             xpp.next();
                            title = xpp.getText();
-                            publishProgress(60);
+                           if(title==null || title.length()==0){
+                               title="No title";
+                           }
+   //                         publishProgress(60);
                         }
                         else if (tagName.equals("text")) {
                             xpp.next();
@@ -306,7 +350,7 @@ public class NewsFeed extends AppCompatActivity {
 
                             //add to the database and get the new ID
 
-                            ContentValues newRowValues = new ContentValues();
+   /*                         ContentValues newRowValues = new ContentValues();
                             //put string name in the NAME column:
                             newRowValues.put(MyDatabaseOpenHelper.COL_MESSAGE, text);
                             newRowValues.put(MyDatabaseOpenHelper.COL_IS_SEND, title);
@@ -314,16 +358,16 @@ public class NewsFeed extends AppCompatActivity {
 
                             //insert in the database:
                             long newId = db.insert(MyDatabaseOpenHelper.TABLE_NAME, null, newRowValues);
-
+*/
                             //now you have the newId, you can create the Contact object
-                            MessageModel newMessage = new MessageModel(text, title, newId);
+                            MessageModel newMessage = new MessageModel(text, title, link);
 
                             //add the new contact to the list:
                             chatList.add(newMessage);
 
-                            chatEditText.setText("");
-                            adapter.notifyDataSetChanged();
-                            publishProgress(100);
+               //             chatEditText.setText("");
+  //                          adapter.notifyDataSetChanged();
+  //                          publishProgress(100);
 
                         }
 
@@ -409,9 +453,9 @@ public class NewsFeed extends AppCompatActivity {
 
             Log.i("AsyncTask", "update:" + values[0]);
 
-            progressBar.setVisibility(View.VISIBLE);
+/*            progressBar.setVisibility(View.VISIBLE);
             progressBar.setProgress(values[0]);
-
+*/
         }
 
         @Override
@@ -420,7 +464,7 @@ public class NewsFeed extends AppCompatActivity {
 
 
 
-            progressBar.setVisibility(View.INVISIBLE);
+//            progressBar.setVisibility(View.INVISIBLE);
         }
 
 
