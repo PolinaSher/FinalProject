@@ -123,10 +123,10 @@ public class NewsFeed extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             //updateChatMessage(false);
             */
-            printCursor();
+          //  printCursor();
         });
 
-        printCursor();
+        //printCursor();
 
 
         //chatListView.setOnItemClickListener( (list, item, position, id) -> {
@@ -311,6 +311,7 @@ public class NewsFeed extends AppCompatActivity {
                             newRowValues.put(MyDatabaseOpenHelper.COL_MESSAGE, text);
                             newRowValues.put(MyDatabaseOpenHelper.COL_IS_SEND, title);
 
+
                             //insert in the database:
                             long newId = db.insert(MyDatabaseOpenHelper.TABLE_NAME, null, newRowValues);
 
@@ -424,10 +425,10 @@ public class NewsFeed extends AppCompatActivity {
 
 
 
-        public boolean fileExistance(String fname) {
+        /* public boolean fileExistance(String fname) {
             File file = getBaseContext().getFileStreamPath(fname);
             return file.exists();
         }
-
+  */
     }
 }

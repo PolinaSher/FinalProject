@@ -43,8 +43,8 @@ public class DetailFragment extends Fragment {
         idView.setText("ID=" + id);
 
         // get the delete button, and add a click listener:
-        Button deleteButton = (Button) result.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(clk -> {
+        Button saveButton = (Button) result.findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(clk -> {
 
             if (isTablet) { //both the list and details are on the screen:
                 NewsFeed parent = (NewsFeed) getActivity();
