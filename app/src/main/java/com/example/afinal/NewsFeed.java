@@ -53,7 +53,7 @@ public class NewsFeed extends AppCompatActivity {
     private EditText chatEditText;
     Cursor results;
     SQLiteDatabase db;
-    private ChatAdapter adapter;
+    private ChatAdapter adapter, adapter1;
     private List<MessageModel> chatList;
     String[] columns;
     private ProgressBar progressBar;
@@ -74,30 +74,33 @@ public class NewsFeed extends AppCompatActivity {
 
         chatList = new ArrayList<>();
         //get a database:
-   /*     MyDatabaseOpenHelper dbOpener = new MyDatabaseOpenHelper(this);
+/*        MyDatabaseOpenHelper dbOpener = new MyDatabaseOpenHelper(this);
         db = dbOpener.getWritableDatabase();
 
         //query all the results from the database:
-        String[] columns = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGE, MyDatabaseOpenHelper.COL_IS_SEND};
+        String[] columns = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGE, MyDatabaseOpenHelper.COL_URL,MyDatabaseOpenHelper.COL_IS_SEND};
         results = db.query(false, MyDatabaseOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
 
         //find the column indices:
         int messageColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_MESSAGE);
+        int urlColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_URL);
         int sendColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_IS_SEND);
         int idColIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_ID);
 
         //iterate over the results, return true if there is a next item:
         while (results.moveToNext()) {
             String message = results.getString(messageColumnIndex);
+            String link = results.getString(urlColumnIndex);
             String isSend = results.getString(sendColumnIndex);
             long id = results.getLong(idColIndex);
 
             //add the new Contact to the array list:
-            chatList.add(new MessageModel(message, isSend, id));
+            DetailFragment.savedList.add(new MessageModel(message,link, isSend, id));
         }
+
+        adapter1 = new ChatAdapter(this, DetailFragment.savedList);
+        chatListView.setAdapter(adapter1);
 */
-
-
         sp = getSharedPreferences("FileName", Context.MODE_PRIVATE);
         String savedString = sp.getString("ReserveName", "");
         chatEditText.setText(savedString);
@@ -195,42 +198,7 @@ public class NewsFeed extends AppCompatActivity {
         editor.commit();
     }
 
-    public class MessageModel {
-        private String msg;
-        private String isSend;
-        private String url;
-        private long id;
 
-        public MessageModel(String msg, String isSend, long id) {
-            this.msg = msg;
-            this.isSend = isSend;
-            this.id = id;
-        }
-
-        public MessageModel(String msg, String isSend, String url) {
-            this.msg = msg;
-            this.isSend = isSend;
-            this.url = url;
-        }
-
-
-        public String getMsg() {
-            return msg;
-        }
-
-        public String getIsSend() {
-            return isSend;
-        }
-
-        public long getId() {
-            return id;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-    }
 
     protected class ChatAdapter extends BaseAdapter {
 
@@ -313,8 +281,9 @@ public class NewsFeed extends AppCompatActivity {
                 //create the network connection:
                 URL url = new URL(myUrl);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setReadTimeout(10000 /* milliseconds */);
-                urlConnection.setConnectTimeout(15000 /* milliseconds */);
+  /*          urlConnection.setReadTimeout(10000 );
+                urlConnection.setConnectTimeout(15000 );
+   */
                 urlConnection.setRequestMethod("GET");
                 urlConnection.setDoInput(true);
                 InputStream inStream = urlConnection.getInputStream();
@@ -376,63 +345,6 @@ public class NewsFeed extends AppCompatActivity {
                         xpp.next();
 
 
-    /*                        parameter1 = xpp.getAttributeValue(null, "value");
-                            Log.e("AsyncTask", "Found parameter value: " + parameter1);
-                            publishProgress(25); //tell android to call onProgressUpdate with 1 as parameter
-
-                            parameter2 = xpp.getAttributeValue(null, "min");
-                            Log.e("AsyncTask", "Found parameter min: " + parameter2);
-                            publishProgress(50); //tell android to call onProgressUpdate with 1 as parameter
-
-                            parameter3 = xpp.getAttributeValue(null, "max");
-                            Log.e("AsyncTask", "Found parameter max: " + parameter3);
-                            publishProgress(75); //tell android to call onProgressUpdate with 1 as parameter
-                        } else if (tagName.equals("weather")) {
-                            iconName = xpp.getAttributeValue(null, "icon");
-                            Log.e("AsyncTask", "Found parameter icon: " + iconName);
-
-
-                            if (fileExistance(iconName + ".png")) {
-                                Log.i(iconName + ".png", "I found the image locally");
-                                FileInputStream fis = null;
-                                try {
-                                    fis = openFileInput(iconName + ".png");
-                                } catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                }
-                                image = BitmapFactory.decodeStream(fis);
-
-
-                            } else {
-                                Log.i(iconName + ".png", "I need to download it");
-                                image = null;
-                                URL url2 = new URL("http://openweathermap.org/img/w/" + iconName + ".png");
-                                HttpURLConnection connection = (HttpURLConnection) url2.openConnection();
-
-                                connection.connect();
-
-                                int responseCode = connection.getResponseCode();
-                                if (responseCode == 200) {
-                                    image = BitmapFactory.decodeStream(connection.getInputStream());
-                                }
-
-                                publishProgress(100); //tell android to call onProgressUpdate with 2 as parameter
-
-                                // Bitmap image  = HTTPUtils.getImage("http://openweathermap.org/img/w/" +iconName+".png");
-                                FileOutputStream outputStream = openFileOutput(iconName + ".png", Context.MODE_PRIVATE);
-                                image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
-                                outputStream.flush();
-                                outputStream.close();
-
-
-                            }
-                        }
-
-                    }
-
-                    xpp.next(); //advance to next XML event
-                }*/
-
                 }
             }catch (Exception ex) {
                 Log.e("Crash!!", ex.getMessage());
@@ -442,7 +354,7 @@ public class NewsFeed extends AppCompatActivity {
             } catch (XmlPullParserException e) {
                 return "xml_error";
             } */
-
+    //        publishProgress(100);
             //return type 3, which is String:
             return "Finished task";
 
