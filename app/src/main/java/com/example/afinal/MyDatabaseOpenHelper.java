@@ -1,6 +1,8 @@
 package com.example.afinal;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -15,7 +17,7 @@ public class MyDatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COL_URL = "URL";
 
 
-    public MyDatabaseOpenHelper(Activity ctx){
+    public MyDatabaseOpenHelper(Context ctx){
         //The factory parameter should be null, unless you know a lot about Database Memory management
         super(ctx, DATABASE_NAME, null, VERSION_NUM );
     }
@@ -23,8 +25,8 @@ public class MyDatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db)
     {
         //Make sure you put spaces between SQL statements and Java strings:
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "( "
-                + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " ( "
+                + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COL_MESSAGE + " TEXT, " + COL_URL + " TEXT, "+ COL_IS_SEND + " TEXT)");
     }
 
@@ -49,4 +51,17 @@ public class MyDatabaseOpenHelper extends SQLiteOpenHelper {
         //Create a new table:
         onCreate(db);
     }
+
+    public long insertNewsFeed(String msg, String link, String title) {
+        SQLiteDatabase db = getWritableDatabase();
+        //add to the database and get the new ID
+        ContentValues newRowValues = new ContentValues();
+        //put string name in the NAME column:
+        newRowValues.put(MyDatabaseOpenHelper.COL_MESSAGE, msg);
+        newRowValues.put(MyDatabaseOpenHelper.COL_IS_SEND, title);
+        newRowValues.put(MyDatabaseOpenHelper.COL_URL, link);
+        //insert in the database:
+        return db.insert(MyDatabaseOpenHelper.TABLE_NAME, null, newRowValues);
+    }
+
 }

@@ -46,6 +46,7 @@ public class NewsFeed extends AppCompatActivity {
     public static final String ITEM_ID = "ID";
     public static final int EMPTY_ACTIVITY = 345;
 
+    MessageModel newMessage;
     private SharedPreferences sp;
     private ListView chatListView;
     private Button sendButton;
@@ -54,11 +55,13 @@ public class NewsFeed extends AppCompatActivity {
     Cursor results;
     SQLiteDatabase db;
     private ChatAdapter adapter, adapter1;
-    private List<MessageModel> chatList;
+    private List<MessageModel> chatList, savedList;
     String[] columns;
     private ProgressBar progressBar;
     private String searched;
     private String link, title, text;
+    MyDatabaseOpenHelper dbOpener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +76,10 @@ public class NewsFeed extends AppCompatActivity {
         chatEditText = (EditText) findViewById(R.id.editText);
 
         chatList = new ArrayList<>();
+        savedList = new ArrayList<>();
         //get a database:
-/*        MyDatabaseOpenHelper dbOpener = new MyDatabaseOpenHelper(this);
-        db = dbOpener.getWritableDatabase();
+        dbOpener = new MyDatabaseOpenHelper(this);
+  /*      db = dbOpener.getWritableDatabase();
 
         //query all the results from the database:
         String[] columns = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGE, MyDatabaseOpenHelper.COL_URL,MyDatabaseOpenHelper.COL_IS_SEND};
@@ -97,6 +101,7 @@ public class NewsFeed extends AppCompatActivity {
             //add the new Contact to the array list:
             DetailFragment.savedList.add(new MessageModel(message,link, isSend, id));
         }
+
 
         adapter1 = new ChatAdapter(this, DetailFragment.savedList);
         chatListView.setAdapter(adapter1);
@@ -243,15 +248,36 @@ public class NewsFeed extends AppCompatActivity {
     //This function only gets called on the phone. The tablet never goes to a new activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        MessageModel newMessage;
         if (requestCode == EMPTY_ACTIVITY) {
             if (resultCode == RESULT_OK) //if you hit the delete button instead of back button
             {
-                long id = data.getLongExtra(ITEM_ID, 0);
+                String news = data.getStringExtra(ITEM_SELECTED);
+                String tl = data.getStringExtra(SEND_RECEIVE);
+                String lk = data.getStringExtra(URL);
+
+
+                long id = dbOpener.insertNewsFeed(news, lk, tl);
+                if (id > 0) {
+                    //now you have the newId, you can create the Contact object
+                    newMessage = new MessageModel(news, lk, tl, id);
+                    savedList.add(newMessage);
+                    adapter1 = new ChatAdapter(this, savedList);
+                    chatListView.setAdapter(adapter1);
+
+                    adapter1.notifyDataSetChanged();
+
+    /*            long id = data.getLongExtra(ITEM_ID, 0);
                 int post = data.getIntExtra(ITEM_POSITION, 0);
                 deleteMessageId(id, post);
+                */
+                }
             }
         }
     }
+
+
+
 
     public void deleteMessageId(long id, int position) {
         int rowsEffected = db.delete(MyDatabaseOpenHelper.TABLE_NAME, MyDatabaseOpenHelper.COL_ID + "=?", new String[]{Long.toString(id)});
@@ -373,7 +399,7 @@ public class NewsFeed extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
-
+            adapter.notifyDataSetChanged();
 
 
 //            progressBar.setVisibility(View.INVISIBLE);
