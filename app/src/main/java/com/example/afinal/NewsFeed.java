@@ -2,6 +2,7 @@ package com.example.afinal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -9,10 +10,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -58,15 +66,17 @@ public class NewsFeed extends AppCompatActivity {
     private List<MessageModel> chatList, savedList;
     String[] columns;
     private ProgressBar progressBar;
-    private String searched;
+    private String searched, s;
     private String link, title, text;
     MyDatabaseOpenHelper dbOpener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
 
+        s="super";
 
         boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
 
@@ -79,6 +89,11 @@ public class NewsFeed extends AppCompatActivity {
         savedList = new ArrayList<>();
         //get a database:
         dbOpener = new MyDatabaseOpenHelper(this);
+
+
+        Toolbar tBar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tBar);
+
   /*      db = dbOpener.getWritableDatabase();
 
         //query all the results from the database:
@@ -187,6 +202,66 @@ public class NewsFeed extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            //what to do when the menu item is selected:
+            case R.id.item1:
+                Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+                break;
+
+
+            case R.id.item2:
+
+                View middle = getLayoutInflater().inflate(R.layout.dialog, null);
+
+                EditText et = (EditText) middle.findViewById(R.id.view_edit_text);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("The Message")
+                        .setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // What to do on Accept
+                                s = et.getText().toString();
+
+                            }
+                        })
+                        .setNegativeButton("back", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // What to do on Cancel
+                            }
+                        }).setView(middle);
+
+                builder.create().show();
+                break;
+
+            case R.id.item3:
+                Toolbar tBar = (Toolbar) findViewById(R.id.toolbar);
+                Snackbar sb = Snackbar.make(tBar, "Go Back", Snackbar.LENGTH_LONG)
+                        .setAction("Go Back", e -> {
+                            finish();
+                        });
+                sb.show();
+                break;
+
+            case R.id.item4:
+                //Show the toast immediately:
+                Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+                break;
+
+        }
+        return true;
     }
 
     protected void onPause() {
