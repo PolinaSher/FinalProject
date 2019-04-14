@@ -20,6 +20,7 @@ public class DetailFragment extends Fragment {
     private boolean isTablet;
     private Bundle dataFromActivity;
     private int post;
+    private long id;
     SQLiteDatabase db;
     private String msg, link, title;
     MessageModel newMessage;
@@ -37,7 +38,7 @@ public class DetailFragment extends Fragment {
         db = dbOpener.getWritableDatabase();
 
         dataFromActivity = getArguments();
-        //       id = dataFromActivity.getLong(NewsFeed.ITEM_ID);
+        id = dataFromActivity.getLong(NewsFeed.ITEM_ID);
         post = dataFromActivity.getInt(NewsFeed.ITEM_POSITION);
         msg = dataFromActivity.getString(NewsFeed.ITEM_SELECTED);
         title = dataFromActivity.getString(NewsFeed.SEND_RECEIVE);
@@ -74,7 +75,8 @@ public class DetailFragment extends Fragment {
                 backToFragmentExample.putExtra(NewsFeed.SEND_RECEIVE, title);
                 backToFragmentExample.putExtra(NewsFeed.URL, link);
 
-
+            backToFragmentExample.putExtra(NewsFeed.ITEM_ID, id);
+            backToFragmentExample.putExtra(NewsFeed.ITEM_POSITION, post);
 
                 parent.setResult(Activity.RESULT_OK, backToFragmentExample); //send data back to FragmentExample in onActivityResult()
                 parent.finish(); //go back

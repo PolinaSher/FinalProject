@@ -225,26 +225,8 @@ public class NewsFeed extends AppCompatActivity {
 
             case R.id.item2:
 
-                View middle = getLayoutInflater().inflate(R.layout.dialog, null);
-
-                EditText et = (EditText) middle.findViewById(R.id.view_edit_text);
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("The Message")
-                        .setPositiveButton("Positive", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // What to do on Accept
-                                s = et.getText().toString();
-
-                            }
-                        })
-                        .setNegativeButton("back", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // What to do on Cancel
-                            }
-                        }).setView(middle);
-
-                builder.create().show();
-                break;
+            Intent save=new Intent(this, SavedActivity.class);
+            startActivity(save);
 
             case R.id.item3:
                 Toolbar tBar = (Toolbar) findViewById(R.id.toolbar);
@@ -257,7 +239,24 @@ public class NewsFeed extends AppCompatActivity {
 
             case R.id.item4:
                 //Show the toast immediately:
-                Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+                View middle = getLayoutInflater().inflate(R.layout.dialog, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("About the app")
+                        .setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // What to do on Accept
+                              //  s = et.getText().toString();
+
+                            }
+                        })
+                        .setNegativeButton("back", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // What to do on Cancel
+                            }
+                        }).setView(middle);
+
+                builder.create().show();
                 break;
 
         }
@@ -280,7 +279,7 @@ public class NewsFeed extends AppCompatActivity {
 
 
 
-    protected class ChatAdapter extends BaseAdapter {
+    public static class ChatAdapter extends BaseAdapter {
 
         private List<MessageModel> msgList;
         private Context context;
@@ -338,10 +337,10 @@ public class NewsFeed extends AppCompatActivity {
                     newMessage = new MessageModel(news, lk, tl, id);
                     savedList.add(newMessage);
                     adapter1 = new ChatAdapter(this, savedList);
-                    chatListView.setAdapter(adapter1);
+ /*                   chatListView.setAdapter(adapter1);
 
                     adapter1.notifyDataSetChanged();
-
+*/
     /*            long id = data.getLongExtra(ITEM_ID, 0);
                 int post = data.getIntExtra(ITEM_POSITION, 0);
                 deleteMessageId(id, post);
@@ -354,14 +353,7 @@ public class NewsFeed extends AppCompatActivity {
 
 
 
-    public void deleteMessageId(long id, int position) {
-        int rowsEffected = db.delete(MyDatabaseOpenHelper.TABLE_NAME, MyDatabaseOpenHelper.COL_ID + "=?", new String[]{Long.toString(id)});
-        if (rowsEffected > 0) {
-            Log.i("Delete this message:", " id=" + id);
-            chatList.remove(position);
-            adapter.notifyDataSetChanged();
-        }
-    }
+
 
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
 
