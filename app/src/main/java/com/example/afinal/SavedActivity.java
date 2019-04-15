@@ -59,6 +59,7 @@ public class SavedActivity extends AppCompatActivity {
 
         savedListView.setOnItemClickListener((list, item, position, id) -> {
             Bundle dataToPass = new Bundle();
+            dataToPass.putString("buttonText", "Delete");
             dataToPass.putString(NewsFeed.ITEM_SELECTED, savedList.get(position).getMsg());
 
             dataToPass.putString(NewsFeed.SEND_RECEIVE, savedList.get(position).getIsSend());

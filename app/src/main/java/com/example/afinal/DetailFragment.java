@@ -22,7 +22,7 @@ public class DetailFragment extends Fragment {
     private int post;
     private long id;
     SQLiteDatabase db;
-    private String msg, link, title;
+    private String buttonText,msg, link, title;
     MessageModel newMessage;
     MyDatabaseOpenHelper dbOpener;
 
@@ -38,6 +38,8 @@ public class DetailFragment extends Fragment {
         db = dbOpener.getWritableDatabase();
 
         dataFromActivity = getArguments();
+
+        buttonText=dataFromActivity.getString("buttonText");
         id = dataFromActivity.getLong(NewsFeed.ITEM_ID);
         post = dataFromActivity.getInt(NewsFeed.ITEM_POSITION);
         msg = dataFromActivity.getString(NewsFeed.ITEM_SELECTED);
@@ -46,6 +48,7 @@ public class DetailFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View result = inflater.inflate(R.layout.fragment_detail, container, false);
+
 
         //show the message
         TextView message = (TextView) result.findViewById(R.id.message);
@@ -59,8 +62,15 @@ public class DetailFragment extends Fragment {
         url.setText(link);
 
         // get the delete button, and add a click listener:
-        Button saveButton = (Button) result.findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(clk -> {
+        Button button = (Button) result.findViewById(R.id.saveButton);
+        if(buttonText.equals("Save")){
+            button.setText(buttonText);
+        }
+        if(buttonText.equals("Delete")){
+            button.setText(buttonText);
+        }
+
+        button.setOnClickListener(clk -> {
 
 
             //for Phone:

@@ -94,33 +94,7 @@ public class NewsFeed extends AppCompatActivity {
         Toolbar tBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tBar);
 
-  /*      db = dbOpener.getWritableDatabase();
 
-        //query all the results from the database:
-        String[] columns = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGE, MyDatabaseOpenHelper.COL_URL,MyDatabaseOpenHelper.COL_IS_SEND};
-        results = db.query(false, MyDatabaseOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
-
-        //find the column indices:
-        int messageColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_MESSAGE);
-        int urlColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_URL);
-        int sendColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_IS_SEND);
-        int idColIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_ID);
-
-        //iterate over the results, return true if there is a next item:
-        while (results.moveToNext()) {
-            String message = results.getString(messageColumnIndex);
-            String link = results.getString(urlColumnIndex);
-            String isSend = results.getString(sendColumnIndex);
-            long id = results.getLong(idColIndex);
-
-            //add the new Contact to the array list:
-            DetailFragment.savedList.add(new MessageModel(message,link, isSend, id));
-        }
-
-
-        adapter1 = new ChatAdapter(this, DetailFragment.savedList);
-        chatListView.setAdapter(adapter1);
-*/
         sp = getSharedPreferences("FileName", Context.MODE_PRIVATE);
         String savedString = sp.getString("ReserveName", "");
         chatEditText.setText(savedString);
@@ -174,6 +148,7 @@ public class NewsFeed extends AppCompatActivity {
                 // Do the onItemClick action*/
         chatListView.setOnItemClickListener((list, item, position, id) -> {
             Bundle dataToPass = new Bundle();
+            dataToPass.putString("buttonText", "Save");
             dataToPass.putString(ITEM_SELECTED, chatList.get(position).getMsg());
 
             dataToPass.putString(SEND_RECEIVE, chatList.get(position).getIsSend());
