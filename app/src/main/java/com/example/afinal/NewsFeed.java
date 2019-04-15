@@ -76,7 +76,7 @@ public class NewsFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
 
-        s="super";
+        s="This is a super app";
 
         boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
 
@@ -112,8 +112,8 @@ public class NewsFeed extends AppCompatActivity {
             adapter = new ChatAdapter(this, chatList);
             chatListView.setAdapter(adapter);
 
-/*            progressBar = (ProgressBar) findViewById(R.id.progressBar);
-          progressBar.setVisibility(View.VISIBLE);  //show the progress bar   */
+            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.VISIBLE);  //show the progress bar   */
 
             //add to the database and get the new ID
 /*            ContentValues newRowValues = new ContentValues();
@@ -370,7 +370,7 @@ public class NewsFeed extends AppCompatActivity {
                         if (tagName.equals("url")) {
                             xpp.next();
                             link = xpp.getText();
-  //                          publishProgress(30);
+                           publishProgress(30);
                         }
                        else if (tagName.equals("title")) {
                             xpp.next();
@@ -378,7 +378,7 @@ public class NewsFeed extends AppCompatActivity {
                            if(title==null || title.length()==0){
                                title="No title";
                            }
-   //                         publishProgress(60);
+                        publishProgress(60);
                         }
                         else if (tagName.equals("text")) {
                             xpp.next();
@@ -404,7 +404,7 @@ public class NewsFeed extends AppCompatActivity {
 
                //             chatEditText.setText("");
   //                          adapter.notifyDataSetChanged();
-  //                          publishProgress(100);
+                          publishProgress(100);
 
                         }
 
@@ -433,9 +433,8 @@ public class NewsFeed extends AppCompatActivity {
 
             Log.i("AsyncTask", "update:" + values[0]);
 
-/*            progressBar.setVisibility(View.VISIBLE);
+          progressBar.setVisibility(View.VISIBLE);
             progressBar.setProgress(values[0]);
-*/
         }
 
         @Override
@@ -444,7 +443,7 @@ public class NewsFeed extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
 
-//            progressBar.setVisibility(View.INVISIBLE);
+           progressBar.setVisibility(View.INVISIBLE);
         }
 
 

@@ -14,17 +14,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Author: Jiyi Wei"/>
+        android:text="@string/author" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Version 1.0"/>
+        android:text="@string/version" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This app reads news stories from a News Crawler"/>
+        android:text="@string/help" />
 
 
 </LinearLayout>
