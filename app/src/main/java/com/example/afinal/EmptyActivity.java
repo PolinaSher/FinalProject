@@ -1,7 +1,9 @@
 package com.example.afinal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class EmptyActivity extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class EmptyActivity extends AppCompatActivity {
                 .replace(R.id.fragmentLocation, dFragment)
                 .addToBackStack("AnyName")
                 .commit();
+
 
        //
     }

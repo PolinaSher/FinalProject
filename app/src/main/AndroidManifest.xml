@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SavedActivity"></activity>
+        <activity android:name=".SavedActivity" />
         <activity android:name=".EmptyActivity" />
         <activity android:name=".New_York" />
         <activity android:name=".NewsFeed">

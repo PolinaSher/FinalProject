@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +63,13 @@ public class DetailFragment extends Fragment {
         //show the id:
         TextView url = (TextView) result.findViewById(R.id.id);
         url.setText(link);
+        url.setOnClickListener(b->{
+            Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+            startActivity(myIntent);
+        });
 
+/*android:autoLink="web"
+        android:linksClickable="true"*/
         // get the delete button, and add a click listener:
         Button button = (Button) result.findViewById(R.id.saveButton);
         if(buttonText.equals("Save")){
