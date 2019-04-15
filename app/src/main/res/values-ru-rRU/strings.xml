@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"></string>
+    <string name="dictionary">Merriam Webster Dictionary</string>
+    <string name="flight">Flight Tracker</string>
+    <string name="nytimes">New York Times Полина Шеррюбле</string>
+    <string name="button_Add_article">New York Times</string>
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_below="@id/toolbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="20dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:progress="1" />
+
+
+    <EditText android:id="@+id/search_box"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter type of article"
+        android:inputType="text"
+        android:layout_below="@id/progressBar" />
+
+    <Button
+        android:id="@+id/search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_box"
+        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/search_box"
+        android:text="Search" />
+
+
+
+    <ListView
+        android:id="@+id/listtype"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_text"
+        />
+
+
+</RelativeLayout>
+

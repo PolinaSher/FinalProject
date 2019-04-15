@@ -1,3 +1,4 @@
+
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="action_settings">Setting</string>
     <string name="app_name">Final</string>
@@ -8,4 +9,12 @@
     <string name="author">Author: Jiyi Wei</string>
     <string name="version">Version 1.0</string>
     <string name="help">You can use this app to search, save or delete news stories from a News Crawler.</string>
+
+  
+    <string name="dictionary">Merriam Webster Dictionary</string>
+    <string name="flight">Flight Tracker</string>
+    <string name="nytimes">New York Times</string>
+    <string name="button_Add_article">New York Times</string>
+
+
 </resources>
