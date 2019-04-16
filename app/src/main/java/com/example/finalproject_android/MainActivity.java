@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button buttonNews = (Button)findViewById(R.id.button4);
-        buttonNewYork.setOnClickListener(new View.OnClickListener() {
+        buttonNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NewsFeed.class);
