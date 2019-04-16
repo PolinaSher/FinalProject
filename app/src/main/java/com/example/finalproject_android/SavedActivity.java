@@ -1,4 +1,4 @@
-package com.example.newsfeed;
+package com.example.finalproject_android;
 
 import android.content.Intent;
 import android.database.Cursor;

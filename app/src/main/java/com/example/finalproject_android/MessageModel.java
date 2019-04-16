@@ -1,4 +1,4 @@
-package com.example.newsfeed;
+package com.example.finalproject_android;
 
 public class MessageModel {
 
