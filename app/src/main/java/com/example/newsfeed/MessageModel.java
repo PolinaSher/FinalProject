@@ -1,4 +1,4 @@
-package com.example.afinal;
+package com.example.newsfeed;
 
 public class MessageModel {
 

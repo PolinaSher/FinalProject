@@ -1,9 +1,7 @@
-package com.example.afinal;
+package com.example.newsfeed;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 public class EmptyActivity extends AppCompatActivity {
 
