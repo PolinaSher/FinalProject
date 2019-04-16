@@ -210,7 +210,7 @@ public class NewsFeed extends AppCompatActivity {
                 View middle = getLayoutInflater().inflate(R.layout.dialog, null);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("About the app")
+                builder.setMessage("")
                         .setPositiveButton("Positive", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // What to do on Accept
