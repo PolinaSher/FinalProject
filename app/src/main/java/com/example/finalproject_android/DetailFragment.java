@@ -1,6 +1,7 @@
 package com.example.finalproject_android;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -68,6 +69,7 @@ public class DetailFragment extends Fragment {
         Button button = (Button) result.findViewById(R.id.saveButton);
         if(buttonText.equals("Save")){
             button.setText(buttonText);
+
         }
         if(buttonText.equals("Delete")){
             button.setText(buttonText);
