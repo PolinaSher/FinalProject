@@ -1,4 +1,4 @@
-package com.example.newsfeed;
+package com.example.finalproject_android;
 
 import android.content.Context;
 import android.content.DialogInterface;

@@ -1,4 +1,4 @@
-package com.example.newsfeed;
+package com.example.finalproject_android;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
