@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,10 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+        <activity android:name=".SavedActivity" />
+        <activity android:name=".EmptyActivity" />
+
+        <activity android:name=".NewsFeed"/>
+
+        
+
         <activity android:name=".DataBase" />
         <activity android:name=".Article" />
         <activity android:name=".New_York" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        />
+
+    <RelativeLayout
+        android:id="@+id/controlLayout"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        >
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/button6"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Type here" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Search" />
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/controlLayout"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_toEndOf="@id/listview" />
+
+</RelativeLayout>
