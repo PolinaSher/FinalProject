@@ -9,4 +9,5 @@
     <string name="version">版本 1.0</string>
     <string name="help">你可以使用本软件搜索，保存或删除新闻.</string>
     <string name="nytimes">纽约时报</string>
+    <string name="main">新闻搜索</string>
 </resources>
