@@ -4,13 +4,13 @@
     <string name="app_name">Final</string>
     <string name="search">Search</string>
     <string name="save" id="@+id/save">Save</string>
-    <string name="delete">Delete</string>
+    <string name="delete" id="@+id/delete">Delete</string>
     <string name="overflow">Help</string>
     <string name="author">Author: Jiyi Wei</string>
     <string name="version">Version 1.0</string>
     <string name="help">You can use this app to search, save or delete news stories from a News Crawler.</string>
-    <string name="main">News Feed by Jiyi Wei</string>
-  
+    <string name="main">News Feed</string>
+
     <string name="dictionary">Merriam Webster Dictionary</string>
     <string name="flight">Flight Tracker</string>
     <string name="nytimes">New York Times</string>
