@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), New_York.class);
                 view.getContext().startActivity(intent);}
         });
+
+
+        Button buttonNews = (Button)findViewById(R.id.button4);
+        buttonNewYork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NewsFeed.class);
+                view.getContext().startActivity(intent);}
+        });
             }
             @Override
             protected void onPause(){
