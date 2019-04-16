@@ -3,8 +3,8 @@
     <string name="action_settings">Setting</string>
     <string name="app_name">Final</string>
     <string name="search">Search</string>
-    <string name="save">Save</string>
-    <string name="delete">Delete</string>
+    <string name="save" id="@+id/save">Save</string>
+    <string name="delete" id="@+id/delete">Delete</string>
     <string name="overflow">Help</string>
     <string name="author">Author: Jiyi Wei</string>
     <string name="version">Version 1.0</string>

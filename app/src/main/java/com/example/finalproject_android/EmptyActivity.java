@@ -2,6 +2,7 @@ package com.example.finalproject_android;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
 public class EmptyActivity extends AppCompatActivity {
 
@@ -11,7 +12,7 @@ public class EmptyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_empty);
 
         Bundle dataToPass = getIntent().getExtras(); //get the data that was passed from FragmentExample
-
+       // String buttonText=dataToPass.getString("buttonText");
         //This is copied directly from FragmentExample.java lines 47-54
         DetailFragment dFragment = new DetailFragment();
         dFragment.setArguments( dataToPass ); //pass data to the the fragment

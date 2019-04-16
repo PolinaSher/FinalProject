@@ -67,10 +67,10 @@ public class DetailFragment extends Fragment {
         // get the delete button, and add a click listener:
         Button button = (Button) result.findViewById(R.id.saveButton);
         if(buttonText.equals("Save")){
-            button.setText(buttonText);
+            button.setText(getResources().getString(R.string.save));
         }
         if(buttonText.equals("Delete")){
-            button.setText(buttonText);
+            button.setText(getResources().getString(R.string.delete));
         }
 
         button.setOnClickListener(clk -> {
@@ -90,6 +90,7 @@ public class DetailFragment extends Fragment {
 
             backToFragmentExample.putExtra(NewsFeed.ITEM_ID, id);
             backToFragmentExample.putExtra(NewsFeed.ITEM_POSITION, post);
+            backToFragmentExample.putExtra("buttonText",buttonText);
 
                 parent.setResult(Activity.RESULT_OK, backToFragmentExample); //send data back to FragmentExample in onActivityResult()
                 parent.finish(); //go back
