@@ -34,14 +34,12 @@ public class Article extends AppCompatActivity {
     private DBHelper myDb;
     private Cursor cursor;
 
-    public void setArticles(List<String> articles) {
-        this.articles = articles;
-    }
+
     public static List<String> getArticles() {
         return articles;
     }
 
-    private static List<String> articles;
+    private static List<String> articles = new ArrayList<>();
 
 
     @Override
@@ -49,11 +47,11 @@ public class Article extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
-       tool = (Toolbar)findViewById(R.id.toolbar_article);
+        tool = (Toolbar)findViewById(R.id.toolbar_article);
         setSupportActionBar(tool);
 
         webView =(WebView) findViewById(R.id.articleURL);
-        articles = new ArrayList<String>();
+        //articles = new ArrayList<String>();
 
         myDb = new DBHelper(this);
 
@@ -107,7 +105,7 @@ public class Article extends AppCompatActivity {
                             String temp = cursor.getString(1);
                             articles.add(temp);
                         }
-                        setArticles(articles);
+                        //setArticles(articles);
                         Intent toDataBase = new Intent(Article.this, DataBase.class);
                         startActivity(toDataBase);
 
@@ -150,5 +148,5 @@ public class Article extends AppCompatActivity {
 //
 //            return result;
 //        }
-    }
+}
 

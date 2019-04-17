@@ -30,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), NewsFeed.class);
                 view.getContext().startActivity(intent);}
         });
+
+        Button buttonFlight = (Button)findViewById(R.id.button3);
+        buttonNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NewsFeed.class);
+                view.getContext().startActivity(intent);}
+        });
             }
             @Override
             protected void onPause(){

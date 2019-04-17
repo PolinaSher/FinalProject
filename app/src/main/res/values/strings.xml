@@ -16,5 +16,19 @@
     <string name="nytimes">New York Times</string>
     <string name="button_Add_article">New York Times</string>
 
+    <string name="startButton">Start</string>
+
+    <string name="savedButton">Saved Flights</string>
+
+    <string name="aboutButton">About</string>
+
+    <string name="enterCode">Enter IATA Airport Code</string>
+
+    <string name="searchButton">Search</string>
+
+    <string name="helpButton">Need Help?</string>
+
+    <string name="saveButton">SAVE</string>
+
 
 </resources>

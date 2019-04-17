@@ -33,9 +33,9 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, VERSION_NUM);
     }
 
-   //create a db using SQL helper
+    //create a db using SQL helper
     //Class DBHelper overrides four methods (must be at list three)
-   @Override
+    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
                 COL_ID + " INTEGER 	PRIMARY KEY AUTOINCREMENT, " +
@@ -55,10 +55,10 @@ public class DBHelper extends SQLiteOpenHelper {
         database = db;
     }
 
-    public Integer deleteOne(String id){
+    public Integer deleteOne(long id){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?", new String[] { id });
-       // db.close();
+        return db.delete(TABLE_NAME, "ID = ?", new String[] { Long.toString(id) });
+        // db.close();
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -115,7 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(COL_SNIPPET, snip);
 
-        database.insert(TABLE_NAME, null, values);
+        long newRowId  =database.insert(TABLE_NAME, null, values);
         Log.i("MMMMMMMMMMMMMMMMMM", snip);
         Log.d(TAG, "addData: Adding: " + snip+" into"+ TABLE_NAME );
         //long newRowId  = db.insert(TABLE_NAME, null, values);//insert method will return the ID for the newly created row

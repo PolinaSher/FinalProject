@@ -5,4 +5,17 @@
     <string name="flight">Flight Tracker</string>
     <string name="nytimes">New York Times Полина Шеррюбле</string>
     <string name="button_Add_article">New York Times</string>
+    <string name="startButton">Начать</string>
+
+    <string name="savedButton">Сохраненные полеты</string>
+
+    <string name="aboutButton">О приложении</string>
+
+    <string name="enterCode">Введите IATA Аэропорт Код</string>
+
+    <string name="searchButton">Поиск</string>
+
+    <string name="helpButton">Нужна помощь?</string>
+
+    <string name="saveButton">СОХРАНИТЬ</string>
 </resources>
