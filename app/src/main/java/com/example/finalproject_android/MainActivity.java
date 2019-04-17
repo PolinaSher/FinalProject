@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button buttonFlight = (Button)findViewById(R.id.button3);
-        buttonNews.setOnClickListener(new View.OnClickListener() {
+        buttonFlight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NewsFeed.class);
+                Intent intent = new Intent(view.getContext(),Flight.class);
                 view.getContext().startActivity(intent);}
         });
             }
