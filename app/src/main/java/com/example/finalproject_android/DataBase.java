@@ -54,18 +54,25 @@ public class DataBase extends AppCompatActivity {
         deletej = (Button) findViewById(R.id.deletelayout);
         deletej.setOnClickListener(
                 new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Integer deleteRow = dbhelp.deleteOne(listview.toString());
-                if (deleteRow > 0)
-                    Toast.makeText(DataBase.this, "Article deleted", Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onClick(View view) {
+                        listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                            @Override
+                            public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
+                                Integer deletedRows = dbhelp.deleteOne(id);
+                                Article.getArticles().remove(position);
+                                arrayAdapter.notifyDataSetChanged();
+                                if (deletedRows > 0)
+                                    Toast.makeText(DataBase.this, "Article deleted", Toast.LENGTH_LONG).show();
 
-                else
-                    Toast.makeText(DataBase.this, "Article not deleted", Toast.LENGTH_LONG).show();
+                                else
+                                    Toast.makeText(DataBase.this, "Article not deleted", Toast.LENGTH_LONG).show();
 
-
-            }
-        });
+                            }
+                        });
+                    }
+                });
+        //  Article.setArticles(new ArrayList<>());
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Article.getArticles());
         listview.setAdapter(arrayAdapter);
         dbhelp = new DBHelper(this);
@@ -84,16 +91,16 @@ public class DataBase extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete:
                 listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
-               Integer deletedRows = dbhelp.deleteOne(arrayAdapter.toString());
-                if (deletedRows > 0)
-                    Toast.makeText(DataBase.this, "Article deleted", Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
+                        Integer deletedRows = dbhelp.deleteOne(id);
+                        if (deletedRows > 0)
+                            Toast.makeText(DataBase.this, "Article deleted", Toast.LENGTH_LONG).show();
 
-                else
-                    Toast.makeText(DataBase.this, "Article not deleted", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(DataBase.this, "Article not deleted", Toast.LENGTH_LONG).show();
 
-            }
+                    }
                 });
                 return super.onOptionsItemSelected(item);
 
@@ -107,8 +114,8 @@ public class DataBase extends AppCompatActivity {
 //                startActivity( goBack);
 
 
-    }
-    return true;}
+        }
+        return true;}
 
 }
 

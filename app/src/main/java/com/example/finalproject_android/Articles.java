@@ -4,16 +4,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class Articles {
-   private String articles;
-   private Boolean save;
-   private int id;
+    private String articles;
+    private Boolean save;
+    private int id;
 
     public Articles(){}
 
     public Articles(String articles, boolean save, int id){
-       this.articles=articles;
-       this.save = save;
-       this.id = id;
+        this.articles=articles;
+        this.save = save;
+        this.id = id;
 
     }
     public int getId(){
@@ -41,5 +41,5 @@ public class Articles {
     public String toString(){
         return articles + " ";
     }
-    }
+}
 
